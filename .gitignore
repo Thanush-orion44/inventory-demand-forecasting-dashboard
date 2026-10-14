@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.vercel/
+node_modules/
+.env
+.env.*
+!.env.example
+demand_forecast_output.csv
+demand_forecast_output_summary.json
+Mini Project Template.pptx
