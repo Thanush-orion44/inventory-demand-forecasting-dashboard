@@ -6,6 +6,7 @@ Run: python generate_synthetic_sales.py
 
 from pathlib import Path
 from datetime import datetime, timedelta
+import re
 from zoneinfo import ZoneInfo
 
 import numpy as np
@@ -62,12 +63,20 @@ def generate(start: str = "2024-01-01", end: str | None = None, seed: int = 42,
     return pd.DataFrame(rows)
 
 
+def generate_product_datasets(start: str = "2024-01-01", end: str | None = None,
+                              seed: int = 42) -> dict[str, pd.DataFrame]:
+    """Generate one reproducible daily sales frame per catalog product."""
+    end = _end_date(end)
+    return {
+        spec["id"]: generate(start, end, seed + (index * 137), product=spec["name"])
+        for index, spec in enumerate(PRODUCTS)
+    }
+
+
 def generate_multi_product(start: str = "2024-01-01", end: str | None = None,
                            seed: int = 42) -> pd.DataFrame:
     """Generate a combined daily sales ledger for every sample product."""
-    end = _end_date(end)
-    frames = [generate(start, end, seed + (index * 137), product=spec["name"])
-              for index, spec in enumerate(PRODUCTS)]
+    frames = list(generate_product_datasets(start, end, seed).values())
     return pd.concat(frames, ignore_index=True).sort_values(["date", "product_id"]).reset_index(drop=True)
 
 
@@ -78,8 +87,22 @@ if __name__ == "__main__":
     single.to_csv(single_path, index=False)
     print(f"Created {len(single):,} single-product daily rows: {single_path}")
 
-    multi = generate_multi_product()
+    product_data = generate_product_datasets()
+    multi = pd.concat(product_data.values(), ignore_index=True).sort_values(
+        ["date", "product_id"]).reset_index(drop=True)
     multi_path = folder / "synthetic_multi_product_sales.csv"
     multi.to_csv(multi_path, index=False)
     print(f"Created {len(multi):,} multi-product daily rows for {multi['product'].nunique()} products: {multi_path}")
+
+    separate_folder = folder / "sample_data"
+    public_separate_folder = folder / "public" / "sample_data"
+    separate_folder.mkdir(exist_ok=True)
+    public_separate_folder.mkdir(exist_ok=True)
+    for spec in PRODUCTS:
+        slug = re.sub(r"[^a-z0-9]+", "_", spec["name"].lower()).strip("_")
+        filename = f"{spec['id'].lower()}_{slug}.csv"
+        separate_path = separate_folder / filename
+        product_data[spec["id"]].to_csv(separate_path, index=False)
+        product_data[spec["id"]].to_csv(public_separate_folder / filename, index=False)
+        print(f"Created individual sample: {separate_path}")
     print("SIMULATED ONLY: discount response and demand patterns are invented for software testing.")

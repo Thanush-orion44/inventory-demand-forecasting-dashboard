@@ -34,6 +34,18 @@ original [single-product sample](synthetic_lays_cream_onion_sales.csv) are
 included. Run `python generate_synthetic_sales.py` to recreate both files with
 daily data through yesterday.
 
+Separate CSVs are available in [`sample_data/`](sample_data/) and through
+download links under the dashboard's CSV uploader:
+
+| Product | Separate sample CSV |
+| --- | --- |
+| Lays Cream & Onion | [Download](sample_data/snk-001_lays_cream_onion.csv) |
+| Coca-Cola 500ml | [Download](sample_data/bev-001_coca_cola_500ml.csv) |
+| Maggi Masala Noodles 70g | [Download](sample_data/ins-001_maggi_masala_noodles_70g.csv) |
+| Dairy Milk 40g | [Download](sample_data/cho-001_dairy_milk_40g.csv) |
+| Parle-G Biscuits | [Download](sample_data/bis-001_parle_g_biscuits.csv) |
+| Kurkure Masala Munch | [Download](sample_data/snk-002_kurkure_masala_munch.csv) |
+
 ## Deployment
 
 The project is deployed on Vercel. Vercel serves the static dashboard from

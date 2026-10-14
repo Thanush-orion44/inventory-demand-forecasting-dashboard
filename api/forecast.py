@@ -87,6 +87,13 @@ class handler(BaseHTTPRequestHandler):
         ):
             target = PUBLIC / path.lstrip("/")
             content_type = "text/csv; charset=utf-8"
+        elif path.startswith("/sample_data/"):
+            filename = path.removeprefix("/sample_data/")
+            if not filename.endswith(".csv") or Path(filename).name != filename:
+                self._send(404, b"Not found", "text/plain; charset=utf-8")
+                return
+            target = PUBLIC / "sample_data" / filename
+            content_type = "text/csv; charset=utf-8"
         elif path == "/api/health":
             self._send(200, b'{"status":"ok"}', "application/json")
             return
