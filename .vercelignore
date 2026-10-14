@@ -6,4 +6,3 @@ python (1).txt
 demand_forecast_output.csv
 demand_forecast_output_summary.json
 generate_synthetic_sales.py
-synthetic_lays_cream_onion_sales.csv
