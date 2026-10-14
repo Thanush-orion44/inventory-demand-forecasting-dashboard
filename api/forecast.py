@@ -7,7 +7,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from io import StringIO
 from pathlib import Path
 import sys
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 import pandas as pd
 
@@ -77,22 +77,16 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(content)
 
     def do_GET(self) -> None:
-        path = urlparse(self.path).path
+        path = unquote(urlparse(self.path).path)
         if path in ("/", "/index.html"):
             target = PUBLIC / "index.html"
             content_type = "text/html; charset=utf-8"
-        elif path in (
-            "/synthetic_lays_cream_onion_sales.csv",
-            "/synthetic_multi_product_sales.csv",
-        ):
-            target = PUBLIC / path.lstrip("/")
-            content_type = "text/csv; charset=utf-8"
-        elif path.startswith("/sample_data/"):
-            filename = path.removeprefix("/sample_data/")
+        elif path.startswith("/sample test data/"):
+            filename = path.removeprefix("/sample test data/")
             if not filename.endswith(".csv") or Path(filename).name != filename:
                 self._send(404, b"Not found", "text/plain; charset=utf-8")
                 return
-            target = PUBLIC / "sample_data" / filename
+            target = PUBLIC / "sample test data" / filename
             content_type = "text/csv; charset=utf-8"
         elif path == "/api/health":
             self._send(200, b'{"status":"ok"}', "application/json")

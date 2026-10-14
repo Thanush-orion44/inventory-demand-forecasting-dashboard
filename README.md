@@ -29,22 +29,22 @@ date and units-sold columns. Forecasts can be downloaded as CSV.
 
 The sample includes Lays Cream & Onion, Coca-Cola 500ml, Maggi Masala Noodles
 70g, Dairy Milk 40g, Parle-G Biscuits, and Kurkure Masala Munch. The combined
-The [combined six-product dataset](synthetic_multi_product_sales.csv) and the
-original [single-product sample](synthetic_lays_cream_onion_sales.csv) are
-included. Run `python generate_synthetic_sales.py` to recreate both files with
-daily data through yesterday.
+[six-product dataset](<sample test data/synthetic_multi_product_sales.csv>) and
+the original [single-product sample](<sample test data/synthetic_lays_cream_onion_sales.csv>)
+are included. Run `python generate_synthetic_sales.py` to recreate all sample
+files with daily data through yesterday.
 
-Separate CSVs are available in [`sample_data/`](sample_data/) and through
+Separate CSVs are available in [`sample test data/`](<sample test data/>) and through
 download links under the dashboard's CSV uploader:
 
 | Product | Separate sample CSV |
 | --- | --- |
-| Lays Cream & Onion | [Download](sample_data/snk-001_lays_cream_onion.csv) |
-| Coca-Cola 500ml | [Download](sample_data/bev-001_coca_cola_500ml.csv) |
-| Maggi Masala Noodles 70g | [Download](sample_data/ins-001_maggi_masala_noodles_70g.csv) |
-| Dairy Milk 40g | [Download](sample_data/cho-001_dairy_milk_40g.csv) |
-| Parle-G Biscuits | [Download](sample_data/bis-001_parle_g_biscuits.csv) |
-| Kurkure Masala Munch | [Download](sample_data/snk-002_kurkure_masala_munch.csv) |
+| Lays Cream & Onion | [Download](<sample test data/snk-001_lays_cream_onion.csv>) |
+| Coca-Cola 500ml | [Download](<sample test data/bev-001_coca_cola_500ml.csv>) |
+| Maggi Masala Noodles 70g | [Download](<sample test data/ins-001_maggi_masala_noodles_70g.csv>) |
+| Dairy Milk 40g | [Download](<sample test data/cho-001_dairy_milk_40g.csv>) |
+| Parle-G Biscuits | [Download](<sample test data/bis-001_parle_g_biscuits.csv>) |
+| Kurkure Masala Munch | [Download](<sample test data/snk-002_kurkure_masala_munch.csv>) |
 
 ## Deployment
 
