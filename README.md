@@ -22,9 +22,17 @@ Start the dashboard and API together:
 python api/forecast.py
 ```
 
-Open <http://127.0.0.1:8000>. Use **Try sample data** to load the included
-simulated Lays Cream & Onion CSV, or upload a CSV with date and units-sold
-columns. The forecast can be downloaded as a CSV.
+Open <http://127.0.0.1:8000>. Use **Try 6-product sample** to load the
+combined synthetic sales ledger. Choose one product from the product-name
+suggestions, then generate its forecast. You can also upload your own CSV with
+date and units-sold columns. Forecasts can be downloaded as CSV.
+
+The sample includes Lays Cream & Onion, Coca-Cola 500ml, Maggi Masala Noodles
+70g, Dairy Milk 40g, Parle-G Biscuits, and Kurkure Masala Munch. The combined
+The [combined six-product dataset](synthetic_multi_product_sales.csv) and the
+original [single-product sample](synthetic_lays_cream_onion_sales.csv) are
+included. Run `python generate_synthetic_sales.py` to recreate both files with
+daily data through yesterday.
 
 ## Deployment
 
@@ -43,9 +51,10 @@ Uploaded CSV data is processed in memory and is not saved by the app. Keep CSV
 uploads below 4 MB. Missing calendar dates are filled as zero sales, so use a
 complete daily history or confirm that missing rows mean zero sales.
 
-The included synthetic dataset and its promotion lift are invented for UI and
-software testing. The dashboard's discount view uses an uplift percentage you
-choose; it is not learned from synthetic discount rows or verified store data.
+The included synthetic products, demand patterns, and promotion responses are
+invented for UI and software testing. The dashboard's discount view uses an
+uplift percentage you choose; it is not learned from synthetic discount rows
+or verified store data.
 Stock recommendations use on-hand stock, lead time, and safety days; they do
 not yet include incoming purchase orders, pack sizes, expiry, or multiple
 locations.

@@ -81,8 +81,11 @@ class handler(BaseHTTPRequestHandler):
         if path in ("/", "/index.html"):
             target = PUBLIC / "index.html"
             content_type = "text/html; charset=utf-8"
-        elif path == "/synthetic_lays_cream_onion_sales.csv":
-            target = PUBLIC / "synthetic_lays_cream_onion_sales.csv"
+        elif path in (
+            "/synthetic_lays_cream_onion_sales.csv",
+            "/synthetic_multi_product_sales.csv",
+        ):
+            target = PUBLIC / path.lstrip("/")
             content_type = "text/csv; charset=utf-8"
         elif path == "/api/health":
             self._send(200, b'{"status":"ok"}', "application/json")
