@@ -4,6 +4,10 @@ This is a small, deploy-ready dashboard for forecasting one product at a time.
 It uses a static HTML interface and a Python function, so there is no Node.js
 build or frontend package installation.
 
+**Live dashboard:** <https://inventory-demand-forecasting-dashbo.vercel.app/>
+
+**Source repository:** <https://github.com/Thanush-orion44/inventory-demand-forecasting-dashboard>
+
 ## Run locally
 
 Install the Python packages once:
@@ -22,17 +26,16 @@ Open <http://127.0.0.1:8000>. Use **Try sample data** to load the included
 simulated Lays Cream & Onion CSV, or upload a CSV with date and units-sold
 columns. The forecast can be downloaded as a CSV.
 
-## Deploy on Vercel
+## Deployment
 
-The repo is configured with `vercel.json`: Vercel serves the `public/`
-dashboard and builds `api/forecast.py` as a Python Function. `requirements.txt`
-contains the runtime dependencies. The Python runtime is currently documented
-by Vercel as Beta.
+The project is deployed on Vercel. Vercel serves the static dashboard from
+`public/` and runs `api/forecast.py` as a Python Function, using the entrypoint
+declared in `pyproject.toml`. Dependencies are listed in `pyproject.toml` and
+`requirements.txt`. There is no frontend build command or required environment
+variable. The dashboard calls the same-origin endpoint `/api/forecast`.
 
-To deploy, put this project in a Git repository, import that repository in
-Vercel, and deploy with the root directory selected. No build command or
-environment variables are needed for this prototype. The same-origin API
-endpoint is `/api/forecast`.
+The Vercel project is connected to the GitHub repository above; pushes to the
+`main` branch trigger deployments.
 
 ## Data notes
 
