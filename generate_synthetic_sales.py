@@ -5,12 +5,16 @@ Run: python generate_synthetic_sales.py
 """
 
 from pathlib import Path
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 
 import numpy as np
 import pandas as pd
 
 
-def generate(start: str = "2024-01-01", end: str = "2025-12-31", seed: int = 42) -> pd.DataFrame:
+def generate(start: str = "2024-01-01", end: str | None = None, seed: int = 42) -> pd.DataFrame:
+    if end is None:
+        end = (datetime.now(ZoneInfo("Asia/Kolkata")).date() - timedelta(days=1)).isoformat()
     rng = np.random.default_rng(seed)
     dates = pd.date_range(start, end, freq="D")
     rows = []
